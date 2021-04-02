@@ -5,7 +5,6 @@ import './Styles/task-area.scss';
 
 // Components:
 import Task from './Task';
-import Button from './../../Base-Components/Button';
 import CreateTaskButtun from './CreateTaskButtun';
 
 export default function TaskArea() {
@@ -16,8 +15,7 @@ export default function TaskArea() {
             date: new Date().toString(),
             body: 'Some Task...',
         }]),
-        [countID, setCountID] = useState(1),
-        [check, setCheck] = useState(false);
+        [countID, setCountID] = useState(1);
 
     const emptyTaskList = <span>Create new task!</span>;
     
@@ -29,7 +27,7 @@ export default function TaskArea() {
         setTasks(newTasks);
     }  
 
-    console.log('render tasks-list')
+    // console.log('render tasks-list')
 
     return (
         <section className="task-area">

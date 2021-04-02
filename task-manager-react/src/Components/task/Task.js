@@ -15,15 +15,16 @@ export default function Task({taskData, deleteTask}) {
         [body, setBody] = useState(taskData.body),
         [previeBody] = useState(body.slice(0, 50) + '...');
 
-    console.log(`render task, id - ${taskID}`);
+    // console.log(`render task, id - ${taskID}`);
 
     useEffect(() => {
         if (body.length < 50) return;
         setBody(previeBody);
+        console.log(`add handler`)
         task.current.addEventListener('mouseover', mouseOverHandler);
         task.current.addEventListener('mouseout', mouseOutHandler);
         // taskData.bindThis = taskData;
-    }, [])
+    }, [taskData])
         
     function mouseOverHandler() {
         setBody(fullBody);
