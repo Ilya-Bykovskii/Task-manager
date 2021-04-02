@@ -7,19 +7,22 @@ import './Styles/task.scss';
 export default function Task({taskData, deleteTask}) {
     const title = taskData.title,
         dateCreated = taskData.date,
-        taskID = taskData.id;
+        taskID = taskData.id,
+        body = taskData.body;
+
+    console.log(taskData.body)
 
     const task = useRef();
     
     const [fullBody] = useState(taskData.body),
-        [body, setBody] = useState(taskData.body),
+        [bodyState, setBodyState] = useState(body),
         [previeBody] = useState(body.slice(0, 50) + '...');
 
     // console.log(`render task, id - ${taskID}`);
 
     useEffect(() => {
         if (body.length < 50) return;
-        setBody(previeBody);
+        setBodyState(previeBody);
         console.log(`add handler`)
         task.current.addEventListener('mouseover', mouseOverHandler);
         task.current.addEventListener('mouseout', mouseOutHandler);
@@ -27,11 +30,11 @@ export default function Task({taskData, deleteTask}) {
     }, [taskData])
         
     function mouseOverHandler() {
-        setBody(fullBody);
+        setBodyState(fullBody);
     }
 
     function mouseOutHandler() {
-        setBody(previeBody);
+        setBodyState(previeBody);
     }
 
     return (
