@@ -6,7 +6,7 @@ import './Styles/task-area.scss';
 // Components:
 import Task from './Task';
 import Button from './../../Base-Components/Button';
-import TaskPopApp from './CreateTaskPopAp';
+import CreateTaskButtun from './CreateTaskButtun';
 
 export default function TaskArea() {
 
@@ -27,41 +27,26 @@ export default function TaskArea() {
         newTasks.push(...tasks.slice(deletedIndex + 1));
 
         setTasks(newTasks);
-
-        console.log(newTasks);
     }  
 
-    const propsPopApp = {
-        closeHandler: createPop,
-        addHandler: setTasks,
-        idCount: setCountID,
-        actualId: countID,
-    }
-    
-    function createPop() {
-        setCheck(!check);
-    }
+    console.log('render tasks-list')
 
     return (
         <section className="task-area">
             <div className="task-area__button-wrapper">
-                <Button props={{
-                    className: 'button-pop-app',
-                    text: 'Create new task',
-                    handler: createPop,
-                }}/>
+                <CreateTaskButtun
+                    props={{setTasks, setCountID, countID}}
+                />
             </div>
             <ul className="task-area__wrapper">
                 {tasks.length ? 
                     tasks.map(element => {
-                        console.log(`render new Task, length - ${tasks.length}`)
                         return  <Task 
                                     taskData={element} 
                                     deleteTask={deleteTaskHandeler}
                                 />}
                 ) : emptyTaskList}
             </ul>
-            {check ? <TaskPopApp props={propsPopApp}/> : null}
         </section>
     )
 }

@@ -15,10 +15,9 @@ export default function Task({taskData, deleteTask}) {
         [body, setBody] = useState(taskData.body),
         [previeBody] = useState(body.slice(0, 50) + '...');
 
-    useEffect(() => {
-        // debug: 
-        console.log(taskData)
+    console.log(`render task, id - ${taskID}`);
 
+    useEffect(() => {
         if (body.length < 50) return;
         setBody(previeBody);
         task.current.addEventListener('mouseover', mouseOverHandler);
