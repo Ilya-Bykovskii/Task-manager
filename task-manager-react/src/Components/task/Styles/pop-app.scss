@@ -1,0 +1,59 @@
+.create-task {
+    position: fixed;
+    // margin-top: 135px;
+    top: 85.28px;
+    left: 0;
+    width:100vw;
+    height:100vh;
+    background: rgba(128,55,0,0.3);
+    display: flex;
+    justify-content:center;
+    align-items:center;
+
+    .create-task__wrapper {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        width: 40vw;
+        padding: 20px;
+        background: #fff;
+        border-radius: 7px;
+        height: 400px;
+
+        .create-task__title-text {
+            font-size: 18px;
+            font-weight: 200;
+        }
+
+        .create-task__input {
+            margin: 10px 0;
+        } 
+
+        .create-task__title-input {
+            width: 20vw;
+            height: 25px
+        }
+
+        .create-task__body-input {
+            height: 100px;
+            resize: none;
+        }
+
+        .create-task__create-btn {
+            width: max-content;
+            margin-top: 100px;
+            text-transform: uppercase;
+        }
+
+        .create-task_close-btn {
+            position: relative;
+            right: -38vw;
+            cursor: pointer;
+            font-size: 30px;
+
+            &:hover {
+                transform: scale(1.11)
+            }
+        }
+    }
+}

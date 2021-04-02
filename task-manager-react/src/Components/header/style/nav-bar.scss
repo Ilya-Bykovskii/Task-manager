@@ -1,0 +1,30 @@
+.nav-bar {
+    margin-left: 5vw;
+
+    
+    .nav-bar__wrapper {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+
+        li {
+            transition: all 200ms linear 100ms;
+
+            &:hover {
+            transform: scale(1.1)
+            }
+        }
+    
+        .nav-bar__item {
+            margin: 0 1vw ;
+            text-decoration: none;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: #000;
+        
+            &:hover {
+                color: #133;
+            }
+        }
+    }
+}
+

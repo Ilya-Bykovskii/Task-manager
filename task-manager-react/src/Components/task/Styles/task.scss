@@ -1,0 +1,23 @@
+.task {
+    width: 80vw;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 200ms ease-in-out;
+
+    .task__title {
+        font-weight: 200;
+        font-size: 20px;
+        display: inline-block;
+    }
+
+    .task__time {
+        display: inline-block;
+        font-size: 10px;
+        float: right;
+    }
+
+    .task__body {
+        font-size: 14px;
+    }
+}
