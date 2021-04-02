@@ -29,15 +29,27 @@ export default function TaskPopApp({props}) {
         addHandler((prev) => {
             idCount(prev => prev + 1);
             closeHandler();
+            
+            if (Array.isArray(prev)) {
+                return [
+                    ...prev,
+                    {
+                        id: actualId,
+                        title: taskTitle,
+                        body: taskBody,
+                        date: new Date().toString(),
+                    }
+                ]
+            }
+
             return [
-                ...prev,
                 {
                     id: actualId,
                     title: taskTitle,
                     body: taskBody,
                     date: new Date().toString(),
                 }
-            ]
+            ] 
         })
     }
 

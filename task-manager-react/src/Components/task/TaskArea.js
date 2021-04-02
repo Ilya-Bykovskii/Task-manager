@@ -1,4 +1,4 @@
-import React, {useState, useReducer} from 'react';
+import React, {useState} from 'react';
 
 // Styles
 import './Styles/task-area.scss';
@@ -14,11 +14,23 @@ export default function TaskArea() {
             id: 0,
             title: 'Hello Task Manager!',
             date: new Date().toString(),
-            body: 'Some Task...'
+            body: 'Some Task...',
         }]),
-        [countID, setCountID] = useState(0),
+        [countID, setCountID] = useState(1),
         [check, setCheck] = useState(false);
+
+    const emptyTaskList = <span>Create new task!</span>;
     
+    function deleteTaskHandeler(id) {
+        const deletedIndex = tasks.findIndex(elem => elem.id === id);
+        let newTasks = tasks.slice(0, deletedIndex);
+        newTasks.push(...tasks.slice(deletedIndex + 1));
+
+        setTasks(newTasks);
+
+        console.log(newTasks);
+    }  
+
     const propsPopApp = {
         closeHandler: createPop,
         addHandler: setTasks,
@@ -40,11 +52,16 @@ export default function TaskArea() {
                 }}/>
             </div>
             <ul className="task-area__wrapper">
-                {tasks.length && 
-                    tasks.map(element => <Task taskData={element}/>
-                )}
+                {tasks.length ? 
+                    tasks.map(element => {
+                        console.log(`render new Task, length - ${tasks.length}`)
+                        return  <Task 
+                                    taskData={element} 
+                                    deleteTask={deleteTaskHandeler}
+                                />}
+                ) : emptyTaskList}
             </ul>
-            {check ? <TaskPopApp props={propsPopApp}/> : console.log('some')}
+            {check ? <TaskPopApp props={propsPopApp}/> : null}
         </section>
     )
 }
