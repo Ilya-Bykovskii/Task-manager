@@ -1,4 +1,4 @@
-import React, {useState, } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 // Components
 import Button from './../../Base-Components/Button';
@@ -14,6 +14,8 @@ export default function TaskPopApp({props}) {
 
     const closeHandler = props.closeHandler,
         addHandler = props.addHandler;
+
+    const titleInput = useRef();
     
     function setNewTask() {
         let spaceCount = 0;
@@ -34,6 +36,10 @@ export default function TaskPopApp({props}) {
         });
     }
 
+    useEffect(() => {
+        titleInput.current.focus();
+    }, [])
+
     return(
         <section className="create-task">
             <div className="create-task__wrapper">
@@ -50,6 +56,7 @@ export default function TaskPopApp({props}) {
                     onChange={(e) => setTaskTitle(e.target.value)}
                     value={taskTitle}
                     placeholder={titlePlaceholder}
+                    ref={titleInput}
                 />    
                 <textarea
                     className="create-task__body-input create-task__input"
