@@ -10,13 +10,11 @@ import './Styles/pop-app.scss';
 export default function TaskPopApp({props}) {
     const [taskTitle, setTaskTitle] = useState(''),
         [taskBody, setTaskBody] = useState(''),
-        [titlePlaceholder, setTitlePlaceholder] = useState('enter task-name')
+        [titlePlaceholder, setTitlePlaceholder] = useState('enter task-name');
 
     const closeHandler = props.closeHandler,
-        addHandler = props.addHandler,
-        idCount = props.idCount,
-        actualId = props.actualId;
-
+        addHandler = props.addHandler;
+    
     function setNewTask() {
         let spaceCount = 0;
         for (let i = 0; i < taskTitle.length; i++) {
@@ -26,31 +24,14 @@ export default function TaskPopApp({props}) {
             setTitlePlaceholder('area can`t be empty!!!');
             return;
         }
-        addHandler((prev) => {
-            idCount(prev => prev + 1);
-            closeHandler();
-            
-            if (Array.isArray(prev)) {
-                return [
-                    ...prev,
-                    {
-                        id: actualId,
-                        title: taskTitle,
-                        body: taskBody,
-                        date: new Date().toString(),
-                    }
-                ]
-            }
 
-            return [
-                {
-                    id: actualId,
-                    title: taskTitle,
-                    body: taskBody,
-                    date: new Date().toString(),
-                }
-            ] 
-        })
+        closeHandler();
+        
+        addHandler({
+            title: taskTitle,
+            body: taskBody,
+            date: new Date().toString(),
+        });
     }
 
     return(

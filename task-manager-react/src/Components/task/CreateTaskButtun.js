@@ -8,9 +8,7 @@ export default function CreateTaskButtun({props}) {
 
         const propsPopApp = {
             closeHandler: createPop,
-            addHandler: props.setTasks,
-            idCount: props.setCountID,
-            actualId: props.countID,
+            addHandler: props,
         }
         
         function createPop() {
