@@ -27,13 +27,53 @@ export default function TaskArea() {
         setTasks(newTasks);
     }  
 
+    function sendTaskOnServer(body, url) {
+        const urlRequest = url || 'https://jsonplaceholder.typicode.com/posts',
+            headers = {
+                'Content-Type': 'application/json; charset=UTF-8'
+            };
+        return fetch(urlRequest, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: headers,
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            }            
+            return response.json().then(error => {
+                const e = new Error('Что-то пошло не так')
+                e.data = error
+                throw e
+            })
+        })
+    }
+
+    function addTask(task) {
+        let serverPost;
+
+        sendTaskOnServer(task)
+        .then(json => {task.id = json.id})
+        .then(() => setTasks((prev) => {
+            if (Array.isArray(prev)) {
+                return [
+                    ...prev,
+                    task
+                ]
+            } else {
+                return [
+                    task,
+                ]
+            }
+        }))
+        .catch(err => console.error(err))
+    }
     // console.log('render tasks-list')
 
     return (
         <section className="task-area">
             <div className="task-area__button-wrapper">
                 <CreateTaskButtun
-                    props={{setTasks, setCountID, countID}}
+                    props={addTask}
                 />
             </div>
             <ul className="task-area__wrapper">

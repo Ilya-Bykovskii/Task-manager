@@ -1,4 +1,4 @@
-import React, {useState, } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 // Components
 import Button from './../../Base-Components/Button';
@@ -10,13 +10,13 @@ import './Styles/pop-app.scss';
 export default function TaskPopApp({props}) {
     const [taskTitle, setTaskTitle] = useState(''),
         [taskBody, setTaskBody] = useState(''),
-        [titlePlaceholder, setTitlePlaceholder] = useState('enter task-name')
+        [titlePlaceholder, setTitlePlaceholder] = useState('enter task-name');
 
     const closeHandler = props.closeHandler,
-        addHandler = props.addHandler,
-        idCount = props.idCount,
-        actualId = props.actualId;
+        addHandler = props.addHandler;
 
+    const titleInput = useRef();
+    
     function setNewTask() {
         let spaceCount = 0;
         for (let i = 0; i < taskTitle.length; i++) {
@@ -26,32 +26,19 @@ export default function TaskPopApp({props}) {
             setTitlePlaceholder('area can`t be empty!!!');
             return;
         }
-        addHandler((prev) => {
-            idCount(prev => prev + 1);
-            closeHandler();
-            
-            if (Array.isArray(prev)) {
-                return [
-                    ...prev,
-                    {
-                        id: actualId,
-                        title: taskTitle,
-                        body: taskBody,
-                        date: new Date().toString(),
-                    }
-                ]
-            }
 
-            return [
-                {
-                    id: actualId,
-                    title: taskTitle,
-                    body: taskBody,
-                    date: new Date().toString(),
-                }
-            ] 
-        })
+        closeHandler();
+        
+        addHandler({
+            title: taskTitle,
+            body: taskBody,
+            date: new Date().toString(),
+        });
     }
+
+    useEffect(() => {
+        titleInput.current.focus();
+    }, [])
 
     return(
         <section className="create-task">
@@ -69,6 +56,7 @@ export default function TaskPopApp({props}) {
                     onChange={(e) => setTaskTitle(e.target.value)}
                     value={taskTitle}
                     placeholder={titlePlaceholder}
+                    ref={titleInput}
                 />    
                 <textarea
                     className="create-task__body-input create-task__input"
