@@ -4,12 +4,13 @@ import React, {useState, useEffect, useRef} from 'react';
 import Button from './../../Base-Components/Button';
 import {X} from "phosphor-react";
 
-// Style:
+// Styles:
 import './Styles/pop-app.scss';
 
 export default function TaskPopApp({props}) {
     const [taskTitle, setTaskTitle] = useState(''),
         [taskBody, setTaskBody] = useState(''),
+        [classNames, setClassNames] = useState('create-task show-notification-slow'),
         [titlePlaceholder, setTitlePlaceholder] = useState('enter task-name');
 
     const closeHandler = props.closeHandler,
@@ -26,14 +27,19 @@ export default function TaskPopApp({props}) {
             setTitlePlaceholder('area can`t be empty!!!');
             return;
         }
-
-        closeHandler();
         
         addHandler({
             title: taskTitle,
             body: taskBody,
             date: new Date().toString(),
         });
+
+        closeHandler();
+    }
+
+    function deleteWrapper() {
+        setClassNames(prev => prev += ' hidden-notification-slow');
+        setTimeout(() => closeHandler(), 500);
     }
 
     useEffect(() => {
@@ -41,10 +47,10 @@ export default function TaskPopApp({props}) {
     }, [])
 
     return(
-        <section className="create-task">
+        <section className={classNames}>
             <div className="create-task__wrapper">
                 <X 
-                    onClick={closeHandler}   
+                    onClick={deleteWrapper}   
                     className='create-task_close-btn'
                 />
                 <h4 className="create-task__title-text">

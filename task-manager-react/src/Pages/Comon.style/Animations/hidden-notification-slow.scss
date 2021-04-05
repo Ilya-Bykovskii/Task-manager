@@ -1,0 +1,13 @@
+.hidden-notification-slow {
+    animation: hidden-notification-slow 500ms linear 1;
+
+    @keyframes hidden-notification-slow {
+        to {
+            opacity: 0;
+        }
+
+        from {
+            opacity: 1;
+        }
+    }
+}
