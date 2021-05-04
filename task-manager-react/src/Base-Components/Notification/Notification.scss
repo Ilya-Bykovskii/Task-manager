@@ -1,0 +1,17 @@
+.notification {
+    position: absolute;
+    z-index: 1000;
+    top: 30px;
+    border: 3px solid #aaa;
+    border-radius: 7px;
+    color: #fff;
+    padding: 0 10px; 
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.warning-notitfaction {
+    background: #800;
+}
